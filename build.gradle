@@ -1,0 +1,40 @@
+buildscript {
+    // ext : build.gradle 에서 사용하는 전역변수를 설정하겠다는 의미
+    ext {
+        springBootVersion = '2.1.9.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+    dependencies {
+        // 스프링부트 그레이들 플러그인의 2.1.9.RELEASE를 의존성으로 받겠다는 뜻
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+/* 앞서 선언한 플러그인 의존성들을 적용할 것인지 결정
+ (io.spring.dependecy-management 플러그인은 스프링 부트의 의존성들을 관리해 주는 플러그인이라 꼭 추가해야함)
+ 이 4개의 플러그인들은 자바와 스프링 부트를 사용하기 위해서 필수 플러그인이라 꼭 추가해야한다.
+ */
+apply plugin : 'java'
+apply plugin : 'eclipse'
+apply plugin : 'org.springframework.boot'
+apply plugin : 'io.spring.dependency-management'
+
+group 'com.lim.book'
+version '1.0-SNAPSHOT'
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    /* compile 명령어가 implementation로 변경됨에따라(Gradle 7.0 (2021.4.9)) 수정
+    implementation
+    testImplementation
+    */
+    implementation('org.springframework.boot:spring-boot-starter-web')
+    testImplementation('org.springframework.boot:spring-boot-starter-test')
+}
+
